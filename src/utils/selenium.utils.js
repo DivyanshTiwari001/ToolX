@@ -25,52 +25,55 @@ const fetchFiles = async (urls, hashValue, extension = '.txt') => {
         let driver = await new Builder().forBrowser('chrome').setChromeOptions(chromeOptions).build();
 
         for (const url of urls) {
-            await driver.executeScript('window.open("_blank")');
-            const handles = await driver.getAllWindowHandles();
-            await driver.switchTo().window(handles[handles.length - 1]);
+            try {
+                await driver.executeScript('window.open("_blank")');
+                const handles = await driver.getAllWindowHandles();
+                await driver.switchTo().window(handles[handles.length - 1]);
 
-            // Navigate to the URL
-            await driver.get(url);
+                // Navigate to the URL
+                await driver.get(url);
 
-            const elements = await driver.wait(until.elementsLocated(By.xpath(anchorXPath)), 10000);
+                const elements = await driver.wait(until.elementsLocated(By.xpath(anchorXPath)), 1000);
 
-            // Use Actions class to perform mouse actions for each element
-            const actions = driver.actions({ bridge: true });
-            let flag = false;
+                // Use Actions class to perform mouse actions for each element
+                const actions = driver.actions({ bridge: true });
+                let flag = false;
 
-            for (const element of elements) {
-                // Example: Move to the element and click
-                const hrefValue = await element.getAttribute('href');
-                if (hrefValue && hrefValue.toLowerCase().endsWith(extension)) {
-                    await actions.move({ origin: element }).click().perform();
-                    const pathname = new URL(hrefValue).pathname;
-                    const fileName = path.basename(pathname);
-                    
-                    const filePath = await waitForNewFile(fileName);
+                for (const element of elements) {
+                    // Example: Move to the element and click
+                    const hrefValue = await element.getAttribute('href');
+                    if (hrefValue && hrefValue.toLowerCase().endsWith(extension)) {
+                        await actions.move({ origin: element }).click().perform();
+                        const pathname = new URL(hrefValue).pathname;
+                        const fileName = path.basename(pathname);
 
-                    const newHash = await genHash(filePath);
+                        const filePath = await waitForNewFile(fileName);
 
-                    fs.unlinkSync(filePath);
+                        const newHash = await genHash(filePath);
 
-                    if (newHash === hashValue) {
-                        flag = true;
-                        break;
+                        fs.unlinkSync(filePath);
+
+                        if (newHash === hashValue) {
+                            flag = true;
+                            break;
+                        }
                     }
                 }
-            }
-            if(flag){
-                const temp = [url,'matched'];
-                data.push(temp);
-            }
-            else{
-                const temp = [url,'unmatched'];
+                if (flag) {
+                    const temp = [url, 'matched'];
+                    data.push(temp);
+                }
+                else {
+                    const temp = [url, 'unmatched'];
+                    data.push(temp);
+                }
+            } catch (err) {
+                const temp = [url, 'unmatched'];
                 data.push(temp);
             }
         }
     } catch (err) {
         console.log("Err : ", err);
-        const temp = [url,'unmatched'];
-        data.push(temp);
     }
     return data;
 }
