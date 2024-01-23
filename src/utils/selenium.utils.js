@@ -69,6 +69,8 @@ const fetchFiles = async (urls, hashValue, extension = '.txt') => {
         }
     } catch (err) {
         console.log("Err : ", err);
+        const temp = [url,'unmatched'];
+        data.push(temp);
     }
     return data;
 }
