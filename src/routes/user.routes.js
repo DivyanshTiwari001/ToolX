@@ -14,7 +14,12 @@ const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 router.route("/").get((req,res)=>{
     res.sendFile(path.join(__dirname,"../frontend/index.html"))
 })
-router.route("/upload").post(
+router.route("/upload").post((req,res,next)=>{
+    if(req.files){
+        next();
+    }
+    res.status(400).json({msg:'empty req'});
+},
     upload.fields([
         {
             name:"inputFile",
@@ -32,8 +37,8 @@ router.route("/upload").post(
             const urls = await getUrlsFromXlsx(req.files.excelFile[0].path)
             const data = await fetchFiles(urls,hashValue,extension);
             createExcel(data);
-            next();
         }
+        next();
     },
     (req,res)=>{
         console.log("Success");
