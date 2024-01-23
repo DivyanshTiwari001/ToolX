@@ -1,0 +1,22 @@
+{
+  "name": "toolx",
+  "productName": "ToolX",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+  "author": "Master001",
+  "license": "ISC",
+  "dependencies": {
+    "chromedriver": "^120.0.2",
+    "dotenv": "^16.3.2",
+    "express": "^4.18.2",
+    "mocha": "^10.2.0",
+    "multer": "^1.4.5-lts.1",
+    "node-xlsx": "^0.23.0",
+    "selenium-webdriver": "^4.16.0"
+  }
+}

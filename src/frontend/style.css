@@ -1,0 +1,59 @@
+body{
+    background-color: aliceblue;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100vw;
+    height: 80vw;
+    max-height: 600px;
+    max-width: 800px;
+    border:2px solid black;
+    margin:auto;
+    color:wheat;
+    background-color: black;
+}
+
+.form-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 60vw;
+    width: 60%;
+    max-height: 400px;
+    border: 2px solid rgb(0, 0, 0);
+    background-color: rgba(252, 235, 235, 0.126);
+}
+
+.form-element{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* border: 2px solid red; */
+}
+
+input{
+    /* border:2px solid red; */
+    width: 70%;
+    background-color: orange;
+    font-weight: 800;
+    color:white
+}
+
+label{
+    text-align: center;
+    width: 30%;
+    font-weight: 800;
+    background-color: black;
+    color:white
+}
+
+#upload-btn{
+    width:100px;
+    height: 60px;
+    background-color: rgb(43, 43, 121);
+    color:white
+}

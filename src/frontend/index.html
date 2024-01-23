@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline'"/>
+    <link rel="stylesheet" href="./style.css" />
+    <title>ToolX</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>ToolX - Make Boring File Matching Easy</h1>
+      <form class="form-container">
+        <div class="form-element">
+          <label for="orgfile">Input File : </label>
+          <input type="file" name="orgfile" id="orgFile" />
+        </div>
+        <div class="form-element">
+          <label for="excelfile">Excel File : </label>
+          <input type="file" name="excelfile" id="excelFile" />
+        </div>
+      </form>
+      <button onclick="upload()" id="upload-btn">Upload</button>
+    </div>
+    <script src="./index.js"></script>
+  </body>
+</html>
