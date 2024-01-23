@@ -9,7 +9,7 @@ dotenv.config({
 const port = process.env.PORT || 8000;
 
 appExpress.listen(port,()=>{
-  console.log( `Application is running on "http://localhost:8000/"`)
+  console.log( `Application is running on "http://localhost:${port}/"`)
 })
 
 appExpress.on('errron',(err)=>{
