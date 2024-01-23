@@ -14,12 +14,7 @@ const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 router.route("/").get((req,res)=>{
     res.sendFile(path.join(__dirname,"../frontend/index.html"))
 })
-router.route("/upload").post((req,res,next)=>{
-    if(req.files){
-        next();
-    }
-    res.status(400).json({msg:'empty req'});
-},
+router.route("/upload").post(
     upload.fields([
         {
             name:"inputFile",
@@ -29,7 +24,13 @@ router.route("/upload").post((req,res,next)=>{
             name: "excelFile",
             maxCount:1
         }
-    ]),async (req,res,next)=>{
+    ]),
+    (req,res,next)=>{
+        if(req.files){
+            next();
+        }
+        else res.status(400).json({msg:'empty req'});
+    },async (req,res,next)=>{
         const filePath = req.files.inputFile?.[0].path;
         if(filePath){
             const extension = path.extname(filePath)
