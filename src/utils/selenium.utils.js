@@ -13,7 +13,7 @@ const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 const downloadPath = path.join(__dirname, '../downloads');
 
 // Configure Chrome options to specify the download directory
-const chromeOptions = new chrome.Options();
+const chromeOptions = new chrome.Options().headless();
 chromeOptions.setUserPreferences({
     'download.default_directory': downloadPath,
 });

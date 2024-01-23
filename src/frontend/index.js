@@ -1,10 +1,11 @@
 const inputFile = document.getElementById('orgFile')
 const excelFile = document.getElementById('excelFile')
-
+const button = document.getElementById("upload-btn")
 const upload = async () => {
     const orgFile = inputFile.files[0];
     const linkFile = excelFile.files[0];
-    
+    button.innerHTML = "Wait...";
+    button.disabled = true;
     try {
         const uri = "http://localhost:8000/upload";
         const formData = new FormData();
@@ -32,9 +33,12 @@ const upload = async () => {
 
             // Remove the link from the document
             document.body.removeChild(link);
+
         } else {
             console.error('Request failed with status:', res.status);
         }
+        button.innerHTML = "Upload";
+        button.disabled = false;
     }
     catch (err) {
         console.log("failed to upload");
