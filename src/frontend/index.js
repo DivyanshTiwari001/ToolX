@@ -7,7 +7,7 @@ const upload = async () => {
     button.innerHTML = "Wait...";
     button.disabled = true;
     try {
-        const uri = "http://localhost:8000/upload";
+        const uri = "https://toolx-9er7.onrender.com/upload";
         const formData = new FormData();
         formData.append('inputFile', orgFile);
         formData.append('excelFile', linkFile);
@@ -37,10 +37,10 @@ const upload = async () => {
         } else {
             console.error('Request failed with status:', res.status);
         }
-        button.innerHTML = "Upload";
-        button.disabled = false;
     }
     catch (err) {
         console.log("failed to upload");
     }
+    button.innerHTML = "Upload";
+    button.disabled = false;
 }
