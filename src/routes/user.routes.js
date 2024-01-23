@@ -44,7 +44,7 @@ router.route("/upload").post(
     (req,res)=>{
         console.log("Success");
         res.sendFile(path.join(__dirname,'../outputs/output.xlsx'));
-        // clearPublicFolder();
+        clearPublicFolder();
     }
 )
 
