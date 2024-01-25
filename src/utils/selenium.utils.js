@@ -67,13 +67,12 @@ const fetchFiles = async (urls, hashValue, extension = '.txt') => {
                     const temp = [url, 'unmatched'];
                     data.push(temp);
                 }
-                await driver.quit();
             } catch (err) {
                 const temp = [url, 'unmatched'];
                 data.push(temp);
-                await driver.quit();
             }
         }
+        await driver.quit();
     } catch (err) {
         console.log("Err : ", err);
     }
